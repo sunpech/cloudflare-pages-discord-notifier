@@ -21,6 +21,7 @@ If you’ve switched to Cloudflare Pages (or started there) and miss getting not
   - [5. Create a Discord Webhook](#5-create-a-discord-webhook)
   - [6. Store Secrets and Create Worker Project](#6-store-secrets-and-create-worker-project)
 - [🚀 Deployment](#-deployment)
+- [📊 Usage Limits](#-usage-limits)
 - [🧪 Testing and Troubleshooting (Optional)](#-testing-and-troubleshooting-optional)
 - [🛡 Security](#-security)
 - [📈 Roadmap / Ideas](#-roadmap--ideas)
@@ -260,6 +261,12 @@ That means for each project listed in PROJECTS, you’ll immediately receive:
 - ✅/❌/⏭️ A notification when the same deploy finishes (success, failure, or skipped)
 
 Subsequent runs will only notify when new deployments start or finish.
+
+### 📊 Usage Limits
+
+Cloudflare Workers on the free plan are limited to **100,000 requests per day**. Each cron trigger execution counts as a request, so make sure your `crons` schedule in `wrangler.toml` (e.g. every minute) won’t exceed this quota.
+
+See [Cloudflare Functions Pricing](https://developers.cloudflare.com/pages/functions/pricing/) for details.
 
 ## 🧪 Testing and Troubleshooting (Optional)
 
