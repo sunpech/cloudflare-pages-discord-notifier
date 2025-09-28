@@ -1,6 +1,6 @@
 # Cloudflare Pages → Discord Deploy Notifier
 
-A [Cloudflare Worker](https://workers.cloudflare.com/) with a cron trigger that monitors one or more Cloudflare Pages projects and posts a message to a Discord channel whenever a new deployment finishes (success or failure).
+A [Cloudflare Worker](https://workers.cloudflare.com/) with a cron trigger that monitors one or more Cloudflare Pages projects and posts a message to a Discord channel when a deployment starts and again when it finishes (success, failure, or skipped).
 
 Cloudflare’s free plan doesn’t offer deploy notifications out-of-the-box. Netlify used to have this, but apparently not anymore (unless you had one in before they remove the interface).
 
@@ -31,8 +31,9 @@ If you’ve switched to Cloudflare Pages (or started there) and miss getting not
 * 🕒 Scheduled polling (every minute, or whatever interval you set via wrangler.toml)
 *	📢 Discord notifications for:
     * 🚧 Deploy started
-    *	✅ Successful deployments
-    *	❌ Failed deployments
+    * ✅ Successful deployments
+    * ❌ Failed deployments
+    * ⏭️ Skipped deployments (e.g. no changes detected)
 *	🔑 Uses Cloudflare KV to remember the last deployment per project, so it only posts once per deploy
 *	🔗 Supports multiple Pages projects in a single Worker (configured in wrangler.toml)
 *	🔒 Secure secrets — no tokens or webhooks are committed to source control
@@ -247,7 +248,7 @@ npx wrangler deploy
 
 That means for each project listed in PROJECTS, you’ll immediately receive:
 - 🚧 A "Deploy started" notification (if the latest deploy is still running)
-- ✅/❌ A notification when the same deploy finishes
+- ✅/❌/⏭️ A notification when the same deploy finishes (success, failure, or skipped)
 
 Subsequent runs will only notify when new deployments start or finish.
 
