@@ -60,7 +60,7 @@ Before configuring anything, make sure Wrangler is logged in to your Cloudflare 
 
 Run:
 
-```
+```bash
 npx wrangler login
 ```
 
@@ -72,7 +72,7 @@ Your browser should open up with Wrangler asking to make changes to your Cloudfl
 
 If you ever need to switch accounts or reset authentication, run:
 
-```
+```bash
 npx wrangler logout
 ```
 
@@ -92,7 +92,7 @@ This is the easiest way to provision everything with the right name and bindings
 
 If you want to start from scratch rather than cloning this repo, you can bootstrap a new Worker project with Wrangler:
 
-```
+```bash
 npm create cloudflare@latest
 ```
 
@@ -118,6 +118,15 @@ cloudflare-pages-discord-notifier/
 
 ## ⚙️ Configuration
 
+Before continuing, make sure you have a real `wrangler.toml` file in place.
+
+If you cloned this repo, copy the example file:
+
+```bash
+cp wrangler.example.toml wrangler.toml
+```
+
+Then edit wrangler.toml and fill in the placeholders as you follow the steps below.
 ### 1. Get Your Cloudflare Account ID
 
 Your `ACCOUNT_ID` is required to call the Pages API.  
@@ -129,7 +138,7 @@ You can find it in a few ways:
   Copy the long hex string after `dash.cloudflare.com/`.
 - **CLI (Wrangler):**
 
-```
+```bash
 npx wrangler whoami
 ```
 
@@ -157,7 +166,7 @@ Your Worker needs a Cloudflare API token with **read-only access** to your Pages
 Your Worker uses Cloudflare KV to remember the last deployment ID per project.
 
 Create the namespace:
-```
+```bash
 npx wrangler kv namespace create STATE
 ```
 
@@ -173,12 +182,12 @@ Copy the id value exactly into wrangler.toml.
 
 If you wish to delete the namespace, first let's list what's there:
 
-```
+```bash
 npx wrangler kv namespace list
 ```
 
 Delete it.
-```
+```bash
 npx wrangler kv namespace delete --namespace-id <THE_ID>
 ```
 
@@ -224,7 +233,7 @@ You will use this URL when storing the `DISCORD_WEBHOOK` secret:
 
 Use Wrangler to securely store your API token and Discord webhook:
 
-```
+```bash
 npx wrangler secret put CF_API_TOKEN
 npx wrangler secret put DISCORD_WEBHOOK
 ```
@@ -238,7 +247,7 @@ Choose Yes — this is expected and will create the Worker in your account.
 
 ## 🚀 Deployment
 
-```
+```bash
 npm install
 npx wrangler deploy
 ```
@@ -263,7 +272,7 @@ If `npx wrangler deploy` worked and your Worker was created successfully, you ca
 If `npx wrangler deploy` fails, or if you want to confirm your credentials before deploying,  
 you can manually test your API token, account ID, and project name with a `curl` request:
 
-```
+```bash
 curl "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/pages/projects/$PROJECT_NAME/deployments?per_page=1" --request GET --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
 ```
 
@@ -280,21 +289,21 @@ For reference, see [Cloudflare Pages API documentation](https://developers.cloud
 ### 2. Run the Worker Locally
 
 You can simulate the cron run locally:
-```
+```bash
 npx wrangler dev --test-scheduled
 ```
 
 ### 3. Tail Logs in Production
 
 Stream live logs after deploying:
-```
+```bash
 npx wrangler tail
 ```
 
 ### 4. Force a New Notification
 
 Delete the last-known deployment ID in KV to trigger a new notification on the next run:
-```
+```bash
 npx wrangler kv key delete "last:project-name" --binding=STATE
 ```
 
