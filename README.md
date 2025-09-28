@@ -102,7 +102,7 @@ Follow the prompts to:
 * Name the project (e.g., cloudflare-pages-discord-notifier)
 * Install dependencies
 
-Then copy this repository’s src/index.ts and wrangler.toml as references to configure your project.
+Then copy this repository’s src/index.ts and wrangler.example.toml as references to configure your project.
 
 ## 📂 Project Structure
 
