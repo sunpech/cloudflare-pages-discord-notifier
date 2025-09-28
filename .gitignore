@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories (in case of nested packages)
+**/node_modules/
+
+# Build outputs
+dist/
+.build/
+
+# Wrangler
+.wrangler/
+
+# Env files
+.env
+.env.*
+!.env.example   # keep example env file if you want to share defaults
+
+# Mac / OS cruft
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+*.log.*
+
+# Coverage / test output (if you add tests later)
+coverage/
