@@ -1,0 +1,18 @@
+name = "cloudflare-pages-discord-notifier"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+workers_dev = false # set to true if you do want the workers.dev URL (for manual testing via fetch handler)
+
+kv_namespaces = [
+    { binding = "STATE", id = "e3a9b123456f4a9db5e12345678a9b12" }
+]
+
+# Run every minute. Safe for 10 projects or less
+[triggers]
+crons = ["*/1 * * * *"]
+
+[vars]
+ACCOUNT_ID = "your_cloudflare_account_id" # Cloudflare account ID that owns the Pages projects
+
+# If more than 10 projects, change cron job to run less frequently
+PROJECTS = """["small-site","docs-site","big-gallery"]"""
