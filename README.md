@@ -6,6 +6,10 @@ Cloudflare’s free plan doesn’t offer deploy notifications out-of-the-box. Ne
 
 If you’ve switched to Cloudflare Pages (or started there) and miss getting notified about deploy successes and failures, this Worker fills that gap — giving you free, automated Discord notifications without upgrading to a paid Cloudflare plan.
 
+An screenshot example of what the Discord bot message looks like:
+
+![Screenshot-04](/images/screenshot-04.png)
+
 ## 📑 Table of Contents
 
 - [✨ Features](#-features)
@@ -24,7 +28,6 @@ If you’ve switched to Cloudflare Pages (or started there) and miss getting not
 - [📊 Usage Limits](#-usage-limits)
 - [🧪 Testing and Troubleshooting (Optional)](#-testing-and-troubleshooting-optional)
 - [🛡 Security](#-security)
-- [📈 Roadmap / Ideas](#-roadmap--ideas)
 - [⚠️ Disclaimer](#️-disclaimer)
 - [📄 License](#-license)
 
@@ -318,11 +321,6 @@ npx wrangler kv key delete "last:project-name" --binding=STATE
 * API Token: Use a custom token with Account → Cloudflare Pages → Read permission only.
 * Webhook URL: Keep it secret (anyone with it can post to your Discord channel).
 * KV Data: Stores only the last deployment ID per project.
-
-## 📈 Roadmap / Ideas
-* Add commit message and branch name to Discord notifications
-* Send different projects to different Discord channels
-* Use Discord embeds for richer, color-coded messages
 
 ## ⚠️ Disclaimer
 
