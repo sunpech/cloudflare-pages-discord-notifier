@@ -41,7 +41,6 @@ An screenshot example of what the Discord bot message looks like:
 *	🔑 Uses Cloudflare KV to remember the last deployment per project, so it only posts once per deploy
 *	🔗 Supports multiple Pages projects in a single Worker (configured in wrangler.toml)
 *	🔒 Secure secrets — no tokens or webhooks are committed to source control
-* 💡 Not implemented yet, but the Worker code could be extended to include branch name, commit message, or custom formatting in notifications
 
 ## 🛠 Requirements
 
