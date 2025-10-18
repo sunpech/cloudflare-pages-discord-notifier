@@ -204,6 +204,20 @@ function finishedEmbed(project: string, dep: Deployment): Embed {
 // ---------- worker entry ----------
 
 export default {
+  async fetch(req: Request, env: Env, ctx: ExecutionContext) {
+    try {
+      return new Response(
+        JSON.stringify({ ok: true, note: "Cron worker; call /run to trigger manually (POST)" }),
+        { status: 200, headers: { "content-type": "application/json" } }
+      );
+    } catch (e: any) {
+      return new Response(JSON.stringify({ error: String(e?.message || e) }), {
+        status: 500,
+        headers: { "content-type": "application/json" },
+      });
+    }
+  },
+  
   async scheduled(_e: ScheduledEvent, env: Env, ctx: ExecutionContext) {
     ctx.waitUntil(handle(env));
   },
